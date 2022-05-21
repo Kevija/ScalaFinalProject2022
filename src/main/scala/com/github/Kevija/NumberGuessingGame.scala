@@ -1,10 +1,13 @@
 package com.github.Kevija
 
+import java.util.Random
 import scala.io.StdIn.{readInt, readLine}
-import scala.util.Random
+
 
 object NumberGuessingGame extends App {
 
+  var smallest = 0;
+  var biggest = 100;
   println("Hello! Welcome to Number Guessing Game!")
   println("Please enter your name: ")
   val playerName = readLine()
@@ -12,14 +15,15 @@ object NumberGuessingGame extends App {
   println(s"Lets start the game $playerName! :)")
 
   def yourTry(): Unit = {
-    val numberToGuess = new Random().nextInt(100)
+    val numberToGuess = new Random().nextInt(biggest)
     var guessedNumber = -1
 
-    println("Please, guess a number from 0 to 100")
+    println("Please, guess a number between "+smallest+" and "+biggest+"")
 
     while (guessedNumber != numberToGuess) {
-      print("Your is your number guess?: ")
+      print("What is your number guess?: ")
       guessedNumber = readInt()
+      //TODO add IF for numbers which are outside our range (0-100)
       if (guessedNumber > numberToGuess) println("Too large!")
       else if (guessedNumber < numberToGuess) println("Too small!")
       else {
