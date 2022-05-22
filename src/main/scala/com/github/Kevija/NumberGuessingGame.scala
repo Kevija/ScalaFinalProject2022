@@ -7,7 +7,7 @@ import scala.io.StdIn.{readInt, readLine}
 
 object NumberGuessingGame extends App {
   val saveDst = "src/resources/NumberGuessingGame/scores.csv"
-  val db = new NumGuessGameDB("src/resources/NumberGuessingGame/NumGuessGame.db")
+  //val db = new NumGuessGameDB("src/resources/NumberGuessingGame/NumGuessGame.db")
   var smallest = 0;
   var biggest = 100;
   println("Hello! Welcome to Number Guessing Game!")
@@ -26,18 +26,20 @@ object NumberGuessingGame extends App {
     while (guessedNumber != numberToGuess) {
       print("What is your number guess?: ")
       guessedNumber = readInt()
-      //TODO add IF for numbers which are outside our range (0-100)
+      //add IF for numbers which are outside our range (0-100)
+      if (guessedNumber> biggest || guessedNumber<smallest) println(s"Inappropriate input. Number should be between $smallest and $biggest. ")
+      else {
       if (guessedNumber > numberToGuess) println("Too large!")
       else if (guessedNumber < numberToGuess) println("Too small!")
       else {
         println("Fantastic! It is correct!")
         return
 
-      }
+      }}
     }
     println("Sorry! You lose!")
   }
     yourTry()
   NumberGuessingUtil.saveGameResult(saveDst,playerName,3) //FIXME numberOfMoves needs to be defined
-
+  //TODO offer to play again
 }
