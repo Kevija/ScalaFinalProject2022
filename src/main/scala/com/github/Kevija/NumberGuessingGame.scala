@@ -7,7 +7,7 @@ import scala.io.StdIn.{readInt, readLine}
 
 object NumberGuessingGame extends App {
   val saveDst = "src/resources/NumberGuessingGame/scores.csv"
-  //val db = new NumGuessGameDB("src/resources/NumberGuessingGame/NumGuessGame.db")
+  val db = new NumGuessGameDB("src/resources/NumberGuessingGame/NumGuessGame.db")
   var smallest = 0;
   var biggest = 100;
   println("Hello! Welcome to Number Guessing Game!")
@@ -15,7 +15,7 @@ object NumberGuessingGame extends App {
   val playerName = readLine()
   var movesArray: ArrayBuffer[Int] = ArrayBuffer()
 
-  println(s"Lets start the game $playerName! :)")
+  println(s"Lets start the game, $playerName! :)")
 
   def yourTry(): Unit = {
     val numberToGuess = new Random().nextInt(biggest)
@@ -32,12 +32,12 @@ object NumberGuessingGame extends App {
       if (guessedNumber > numberToGuess) println("Too large!")
       else if (guessedNumber < numberToGuess) println("Too small!")
       else {
-        println("Fantastic! It is correct!")
+        println("Fantastic! :) It is correct!")
         return
 
       }}
     }
-    println("Sorry! You lose!")
+    println("Sorry! :( Maybe next time!")
   }
     yourTry()
   NumberGuessingUtil.saveGameResult(saveDst,playerName,3) //FIXME numberOfMoves needs to be defined
