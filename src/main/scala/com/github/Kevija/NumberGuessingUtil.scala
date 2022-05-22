@@ -40,7 +40,7 @@ object NumberGuessingUtil {
       println(s"Need to save name $playerName and $numberOfMoves")
       val now = Calendar.getInstance().getTime()
       println(s"Today is $now")
-      val uctNow = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT)
+      val uctNow = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_DATE_TIME)
       val row = s"$playerName, $numberOfMoves,$uctNow"
       saveText(dst,row,true)
     }
