@@ -11,6 +11,7 @@ import java.util.Calendar
 
 object NumberGuessingUtil {
 
+  //saves the text
   def saveText(dstPath: String, text: String, append:Boolean=false, verbose:Boolean=false):Unit = {
     //    import java.io.{PrintWriter, File} //explicit import
     if (verbose) println(s"Saving ${text.length} characters to $dstPath")
@@ -22,15 +23,20 @@ object NumberGuessingUtil {
     fw.write(text)
     fw.close() //when writing it is especially important to close as early as possible
   }
+
+  //saves the lines
   def saveLines(dstPath: String, lines: Array[String], append:Boolean=false, lineEnd:String="\n"):Unit = {
     saveText(dstPath, lines.mkString(lineEnd), append)
   }
+
+  //gets the moves
   def getMoves: Array[Int] = movesArray.toArray
   //def printMoves(): Array[Int] = {
   //  for ((move, index) <- moves.Array.zipWithIndex)
   //    movesArray.toArray
   //}
-//TODO def numberOfMoves
+
+  // saves the results of game
   def saveGameResult(dst: String, playerName: String, numberOfMoves: Int ) = {
     if(! Files.exists(Paths.get(dst))){
       println("Saving header since no file exists")
@@ -45,6 +51,8 @@ object NumberGuessingUtil {
       saveText(dst,row,true)
     }
   }
+
+  //saves the game scores
   def saveGameScore(folder: String = "src/resources/NumberGuessingGame", prefix: String = "game", suffix: String= ".csv"): Unit = {
     println("Saving game score!")
     val now = Calendar.getInstance().getTime
@@ -56,6 +64,7 @@ object NumberGuessingUtil {
       val row = s"$playerName, $move"
       row
     }
+
     saveLines(dst, moveRows.toArray)
   }
 }
