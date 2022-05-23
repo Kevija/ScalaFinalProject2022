@@ -5,27 +5,29 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn.{readInt, readLine}
 
 /**
- * object for holding NumberGuessingGame code
- * @author Anita Kaminska and Evija Kvante
+ * Object for holding NumberGuessingGame code
+ * @author Anita Berziņa and Evija Kvante
  * @version 1.0.0
  */
 
 object NumberGuessingGame extends App {
 
   val saveDst = "src/resources/NumberGuessingGame/scores.csv"
-  //val db = new NumGuessGameDB("src/resources/NumberGuessingGame/NumGuessGame.db")
-  var smallest = 0;
-  var biggest = 100;
-  println("Hello! Welcome to Number Guessing Game!")
+  val smallest = 0
+  val biggest = 100
+  println("****************************************************")
+  println("****** Hello! Welcome to Number Guessing Game! *****")
+  println("*****************************************************")
   println("Please enter your name: ")
   val playerName = readLine()
   var movesArray: ArrayBuffer[Int] = ArrayBuffer()
-  var numberOfMoves = 0;
-  val tryCount = 7;
+  var numberOfMoves = 0
+  val tryCount = 7
 
-  println(s"Lets start the game, $playerName! :)")
+  println(s"Lets start the game, $playerName! ❤ ")
 
-  //main method for checking the number
+  /** Main method for checking the number */
+
   def yourTry(): Unit = {
     val numberToGuess = new Random().nextInt(biggest)
     var guessedNumber = -1
@@ -36,28 +38,37 @@ object NumberGuessingGame extends App {
       print("What is your number guess?: ")
       guessedNumber = readInt()
 
-      //added IF case for numbers which are outside our range (0-100)
+      /** Added IF case for numbers which are outside our range (0-100) */
+
      numberOfMoves=numberOfMoves+1
       if (guessedNumber> biggest || guessedNumber<smallest) println(s"Inappropriate input. Number should be between $smallest and $biggest. ")
       else {
-      if (guessedNumber > numberToGuess) println("Too large!")
-      else if (guessedNumber < numberToGuess) println("Too small!")
+      if (guessedNumber > numberToGuess) println("Too large! ➖ ")
+      else if (guessedNumber < numberToGuess) println("Too small! ➕ ")
       else {
-    // text that appears when guess a correct number
-        println(s"Fantastic, $playerName! :) It is correct! You solved this game in $numberOfMoves moves")
-        return
 
+        /** Appears the text when the number is guessed */
+
+        println(s"Fantastic, $playerName! 👏 It is correct! You solved this game in $numberOfMoves moves")
+        println("********************************************************************")
+        return
       }}
     }
-    // text that appears losing the game
-    println(s"Sorry, $playerName! :( Maybe next time!")
+
+    /** Appears the text, when game is lost */
+
+    println(s"Sorry, $playerName, you didn't guess the correct number! ☹ Maybe next time!")
+    println("***************************************************************")
   }
     yourTry()
 
-  //saves game results
+  /** Saves the results of game */
+
   NumberGuessingUtil.saveGameResult(saveDst,playerName,numberOfMoves)
 
-  /** functionalities for future improvements
-  *TODO offer to play again
-   */
+  /** Functionalities for future improvements:
+   *  offer to play again
+     save game results in database */
+
+
 }
